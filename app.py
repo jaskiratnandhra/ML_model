@@ -13,19 +13,22 @@ async def index():
 
 global image_url
 global userid
+global timestamp
 
-@app.get('/{userid}/{{url}}')
-async def get_url(userid,url):
+@app.get('/{userid}/{{timestam}}/{{url}}')
+async def get_url(userid,timestam,url):
     global image_url
-    
-
+    global timestamp
     image_url=url
     userid=userid
+    timestamp=timestam
  
    
 @app.post('/{userid}')
 async def post_url(userid):
     global image_url
+    global timestamp
+
     userid=userid
     import io
     import os
@@ -149,9 +152,8 @@ async def post_url(userid):
     l=meal
                                                              
       #display(Image.fromarray(image_np))
-    import datetime  
-    current_time = datetime.datetime.now()  
-    return {"UserId":userid,"TimeStamp":current_time,"Meal":meal}
+     
+    return {"UserId":userid,"TimeStamp":timestamp,"Meal":meal}
     
 
 
